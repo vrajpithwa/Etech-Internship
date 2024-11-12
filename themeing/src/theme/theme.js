@@ -1,16 +1,17 @@
 import { createTheme } from '@mui/material/styles';
 
+
 const theme = createTheme({
     palette: {
         primary: {
-            main: '#3498db',
+            main: '#2d19ae',
         },
         secondary: {
-            main: '#2ecc71',
+            main: '#dc187a',
         },
         background: {
             default: '#f7f7f7',
-            paper: '#ffffff',
+            paper: '#f6f6f6',
         },
         text: {
             primary: '#333333',
@@ -19,12 +20,12 @@ const theme = createTheme({
     },
     typography:{
             fontFamily: 'Arial, sans-serif',
-            h1: {fontSize: '10px', fontWeight: 700},
-            h2: {fontSize: '9px', fontWeight: 700},
-            h3: {fontSize: '8px', fontWeight: 400},
+            h1: {fontSize: '50px', fontWeight: 700},
+            h2: {fontSize: '30px', fontWeight: 700},
+            h3: {fontSize: '20px', fontWeight: 600},
 
         },
-        spacing: 10,
+    spacing: 10,
     
 });
 
