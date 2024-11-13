@@ -77,11 +77,8 @@ const Header: React.FC = () => {
           <IconButton color="inherit" href="https://github.com/vrajpithwa">
             <GitHub></GitHub>
           </IconButton>
-          <IconButton color="inherit" href="#">
+          <IconButton color="inherit" href="https://www.youtube.com/@vrajpithwa">
             <YouTube />
-          </IconButton>
-          <IconButton color="inherit" href="#">
-            <LanguageIcon />
           </IconButton>
         </Box>
       </Toolbar>

@@ -90,23 +90,9 @@ const Hero: React.FC = () => {
       loop: true,
     }}
   />
-
   
 <br></br>
 
-        <Button variant="contained" color="secondary" style={{marginTop:70}}>
-          <a
-            href="https://www.linkedin.com/in/vrajpithwa"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              textDecoration: "none",
-              color: "inherit",
-            }}
-          >
-            Let's Connect on linkedin
-          </a>
-        </Button>
       </Content>
 
             

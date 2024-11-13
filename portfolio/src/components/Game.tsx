@@ -116,24 +116,24 @@ const resetGame = () => {
 
 const saveScore = async (winner: string) => {
     console.log(`Attempting to save score for winner: ${winner}`);
-    try {
-      const response = await fetch('http://localhost:3000/api/score_save', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ player_name: winner, score: 1 }),
-      });
-      console.log('Data saved');
-      setRefreshData((prev) => !prev);
-      console.log(`Response status: ${response.status}`);
+    // try {
+    //   const response = await fetch('http://localhost:3000/api/score_save', {
+    //     method: 'POST',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify({ player_name: winner, score: 1 }),
+    //   });
+    //   console.log('Data saved');
+    //   setRefreshData((prev) => !prev);
+    //   console.log(`Response status: ${response.status}`);
   
-    //   if (response.ok) {
+    // //   if (response.ok) {
     //     alert(`Score saved successfully for ${winner}`);
     //   } else {
     //     alert('Failed to save score');
     //   }
-    } catch (error) {
-      console.error('Error:', error);
-    }
+    // } catch (error) {
+    //   console.error('Error:', error);
+    // }
   };
   
   // Disable squares until both players' names are entered
@@ -190,7 +190,7 @@ const saveScore = async (winner: string) => {
         </div>
      
     </div>
-    <DataTable refreshData={refreshData}></DataTable>
+    {/* <DataTable refreshData={refreshData}></DataTable> */}
     </Container>
   );
 };
