@@ -38,7 +38,7 @@ const ProjectCard = styled(Card)(({ theme }) => ({
 const Projects: React.FC = () => {
   return (
     
-    <Container maxWidth="lg" sx={{ padding: "2rem 0" }}>
+    <Container maxWidth="lg" sx={{ paddingTop: "80px" }}>
       <Typography variant="h2" align="center" gutterBottom>
         My Projects
       </Typography>
