@@ -4,6 +4,7 @@ import { Box, Typography, Button } from "@mui/material";
 import styled from "@emotion/styled";
 import cornerImg from '../assets/bg3.png';
 import cornerImg2 from '../assets/bg2.png';
+import Typewriter from 'typewriter-effect';
 
 // Style the container to have an image in the corner and overlay elements on top
 const HeroContainer = styled(Box)({
@@ -48,8 +49,18 @@ const Hero: React.FC = () => {
           Hi! I'm Vraj Pithwa
         </Typography>
         <Typography variant="body1" sx={{ maxWidth: 600, mx: "auto", mb: 4 }}>
-          I am an aspiring ICT student passionate about software, eager to learn and gain hands-on experience with modern tech.
+          I am an aspiring ICT student passionate about software,
+          <Typewriter
+  options={{
+    strings: [' eager to learn and', 'gain hands-on experience with modern tech.'],
+    autoStart: true,
+    loop: true,
+
+  }}
+/>
         </Typography>
+     
+
         <Button variant="contained" color="secondary">
   <a
     href="https://www.linkedin.com/in/vrajpithwa"
