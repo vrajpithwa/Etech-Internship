@@ -6,7 +6,20 @@ import cornerImg from '../assets/bg3.png';
 import cornerImg2 from '../assets/bg2.png';
 import Typewriter from 'typewriter-effect';
 
-// Style the container to have an image in the corner and overlay elements on top
+// Create a separate container for the blur effect
+const BlurBackground = styled(Box)({
+  position: 'unset',
+  top: 0,
+  left: 0,
+  width: "500px",
+  height: "30%",
+  backgroundColor: 'rgb(138, 43, 226)',
+  filter: 'blur(100px)',
+  opacity: '0.3',
+  zIndex: 2,
+});
+
+
 const HeroContainer = styled(Box)({
   position: "relative",
   height: "100vh",
@@ -16,67 +29,74 @@ const HeroContainer = styled(Box)({
   justifyContent: "center",
   textAlign: "center",
   overflow: "hidden",
-  backgroundColor: "#121212",
+  zIndex: 1,
 });
 
-// Positioned background image in the corner
 const CornerImage = styled("img")({
   position: "absolute",
   top: 100,
   left: 0,
-  width: "100%", // adjust width as per your requirement
+  width: "100%",
   height: "60%",
-  opacity: 0.2, // make it faint to not distract from main content
-  zIndex: 1,
+  opacity: 0.2,
+  zIndex: 2,
 });
 
-// Content overlay on top of the background
 const Content = styled(Box)({
-  position: "relative",
-  zIndex: 2, // higher z-index to keep it above the image
+  position: "absolute",
+  zIndex: 3, // Increased z-index to be above both blur and corner image
 });
 
 const Hero: React.FC = () => {
   return (
     <HeroContainer>
-      <CornerImage src={cornerImg} alt="Corner Background Image" />
-      <CornerImage src={cornerImg2} alt="Corner Background Image" />
+      <BlurBackground /> 
+      {/* <CornerImage src={cornerImg} alt="background" /> */}
       <Content>
-        <Typography variant="h5" color="secondary">
+        <Typography variant="h5" color="secondary" sx={{ marginRight: 2 }}>
           Welcome to my Portfolio
         </Typography>
-        <Typography variant="h1" sx={{ my: 2 }}>
-          Hi! I'm Vraj Pithwa
-        </Typography>
+        <Box display="flex" alignItems="center">
+          <Typography variant="h1">
+            Hi! I'm 
+          </Typography>
+          <Typography
+            variant="h1"
+            style={{
+              marginLeft: 20,
+              background: 'linear-gradient(45deg,#ff69b4,#da70d6,#9370db,#87cefa)',
+              WebkitBackgroundClip: 'text',
+              color: 'transparent'
+            }}
+          >
+            Vraj Pithwa
+          </Typography>
+        </Box>
         <Typography variant="body1" sx={{ maxWidth: 600, mx: "auto", mb: 4 }}>
-          I am an aspiring ICT student passionate about software,
+          Software,
           <Typewriter
-  options={{
-    strings: [' eager to learn and', 'gain hands-on experience with modern tech.'],
-    autoStart: true,
-    loop: true,
-
-  }}
-/>
+            options={{
+              strings: ['Software Developer', 'gain hands-on experience with modern tech.'],
+              autoStart: true,
+              loop: true,
+            }}
+          />
         </Typography>
-     
-
         <Button variant="contained" color="secondary">
-  <a
-    href="https://www.linkedin.com/in/vrajpithwa"
-    target="_blank"
-    rel="noopener noreferrer"
-    style={{
-      textDecoration: "none",
-      color: "inherit",
-    }}
-  >
-    Let’s Connect on linkedin
-  </a>
-</Button>
-
+          <a
+            href="https://www.linkedin.com/in/vrajpithwa"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              textDecoration: "none",
+              color: "inherit",
+            }}
+          >
+            Let's Connect on linkedin
+          </a>
+        </Button>
       </Content>
-      
+
     </HeroContainer>
   );
 };

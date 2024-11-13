@@ -1,52 +1,53 @@
 import React, { useEffect, useState } from 'react';
 import { Container } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import axios from 'axios'; // Or you can use `fetch`
+import axios from 'axios';
 
 // Define the type for the fetched data
-interface UserData {
+interface ScoreData {
   id: number;
-  name: string;
-  email: string;
-  phone: string;
+  player_name: string;
+  score: number;
+  created_at: string;
 }
 
-const DataTable: React.FC = () => {
-  const [rows, setRows] = useState<UserData[]>([]);
+interface DataTableProps {
+  refreshData: boolean;
+}
+
+const DataTable: React.FC<DataTableProps> = ({ refreshData }) => {
+  const [rows, setRows] = useState<ScoreData[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>('');
 
-  // Define columns for the DataGrid
   const columns: GridColDef[] = [
     { field: 'id', headerName: 'ID', width: 90 },
-    { field: 'player_name', headerName: 'Player_name', width: 150 },
-    { field: 'score', headerName: 'Score', width: 200 },
-    { field: 'created_at', headerName: 'Time', width: 150 },
+    { field: 'player_name', headerName: 'Player Name', width: 150 },
+    { field: 'score', headerName: 'Score', width: 100 },
+    { 
+      field: 'created_at', 
+      headerName: 'Time', 
+      width: 200  
+    },
   ];
 
-  
-  // Fetch data from the API
+  const fetchData = async () => {
+    setLoading(true);
+    setError('');
+    try {
+      const response = await axios.get<ScoreData[]>('http://localhost:3000/api/score');
+      setRows(response.data);
+    } catch (error) {
+      setError('Error fetching data');
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      setError('');
-      try {
-        const response = await axios.get<UserData[]>('http://localhost:3000/users');
-        setRows(response.data);
-      } catch (error) {
-        setError('Error fetching data');
-        console.error('Error fetching data:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
     fetchData();
-    const interval = setInterval(() => {
-        fetchData(); // Fetch data periodically
-      }, 2000);
-      return () => clearInterval(interval);
-    
-  }, []);
+  }, [refreshData]);
 
   return (
     <Container>
@@ -57,6 +58,10 @@ const DataTable: React.FC = () => {
           rows={rows}
           columns={columns}
           loading={loading}
+          initialState={{
+            pagination: { paginationModel: { pageSize: 5 } },
+          }}
+          pageSizeOptions={[5, 10, 25]}
         />
       </div>
     </Container>

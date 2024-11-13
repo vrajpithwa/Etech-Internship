@@ -28,6 +28,7 @@ const darkTheme = createTheme({
         fontFamily: 'system-ui',
         fontSize: 88,
         fontWeight: 900,
+        
     },
     h2:{
         fontSize: 60,

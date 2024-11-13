@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Container, Button } from '@mui/material';
 import React, { useState } from 'react';
 import '../App.css';
 import DataTable from './GameScore';
@@ -74,6 +74,7 @@ const Game: React.FC = () => {
   const [currentMove, setCurrentMove] = useState(0);
   const [playerX, setPlayerX] = useState('');
   const [playerO, setPlayerO] = useState('');
+  const [refreshData, setRefreshData] = useState(false);
   const xIsNext = currentMove % 2 === 0;
   const currentSquares = history[currentMove];
 
@@ -83,27 +84,58 @@ const Game: React.FC = () => {
     setCurrentMove(nextHistory.length - 1);
   };
 
-  const saveScore = async (winner: string) => {
+//   const saveScore = async (winner: string) => {
+//     console.log(`Attempting to save score for winner: ${winner}`);
+//     try {
+//       const response = await fetch('http://localhost:3000/api/score_save', {
+//         method: 'POST',
+//         headers: { 'Content-Type': 'application/json' },
+//         body: JSON.stringify({ player_name: winner, score: 1 })
+//       }
+//     );
+//     console.log('Data saved')
+//     setRefreshData((prev) => !prev);
+//       console.log(`Response status: ${response.status}`);
+//       if (response.ok) {
+//         alert(`Score saved successfully for ${winner}`);
+//       } else {
+//         alert('Failed to save score');
+//       }
+//     } catch (error) {
+//       console.error('Error:', error);
+//     }
+//   };
+const resetGame = () => {
+    // Reset game state
+    setHistory([Array(9).fill(null)]);
+    setCurrentMove(0);
+    setPlayerX('');
+    setPlayerO('');
+  };
+
+
+const saveScore = async (winner: string) => {
     console.log(`Attempting to save score for winner: ${winner}`);
     try {
-      const response = await fetch('http://localhost:3000/api/score', {
+      const response = await fetch('http://localhost:3000/api/score_save', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ playerName: winner, score: 1 })
-        
-      }
-    );
+        body: JSON.stringify({ player_name: winner, score: 1 }),
+      });
+      console.log('Data saved');
+      setRefreshData((prev) => !prev);
       console.log(`Response status: ${response.status}`);
-      if (response.ok) {
-        alert(`Score saved successfully for ${winner}`);
-      } else {
-        alert('Failed to save score');
-      }
+  
+    //   if (response.ok) {
+    //     alert(`Score saved successfully for ${winner}`);
+    //   } else {
+    //     alert('Failed to save score');
+    //   }
     } catch (error) {
       console.error('Error:', error);
     }
   };
-
+  
   // Disable squares until both players' names are entered
   const isDisabled = !(playerX && playerO);
 
@@ -140,10 +172,25 @@ const Game: React.FC = () => {
             isDisabled={isDisabled} // Pass the disabled state to the Board
           />
         </div>
-
+        <div style={{ marginTop: '20px' }}>
+          <Button 
+            variant="contained" 
+            color="secondary" 
+            onClick={resetGame}
+            sx={{ 
+              marginTop: 2,
+              backgroundColor: '#1976d2',
+              '&:hover': {
+                backgroundColor: '#1565c0'
+              }
+            }}
+          >
+            Reset Game
+          </Button>
+        </div>
      
     </div>
-    <DataTable></DataTable>
+    <DataTable refreshData={refreshData}></DataTable>
     </Container>
   );
 };

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background-color: black;
+      position: relative;
+    }
+
+    .blur-background {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background-color: rgb(138, 43, 226);
+      filter: blur(100px);
+      opacity: 0.4;
+      z-index: 1;
+    }
+
+    .gradient-text {
+      font-size: 4rem;
+      font-weight: bold;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(
+        45deg,
+        #ff69b4,    /* Hot pink */
+        #da70d6,    /* Orchid */
+        #9370db,    /* Medium purple */
+        #87cefa     /* Light sky blue */
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      z-index: 2;
+      position: relative;
+      text-align: center;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <div class="blur-background"></div>
+  <div class="gradient-text">Sample Text</div>
+</body>
+</html>
