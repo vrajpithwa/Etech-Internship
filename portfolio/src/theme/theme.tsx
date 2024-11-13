@@ -35,13 +35,21 @@ const darkTheme = createTheme({
         fontWeight: 800,
 
     },
+    h4:{
+      fontSize: 21,
+      fontWeight: 600,
+    },
     h5:{
         fontSize: 18,
         fontWeight: 1000
     },
+    h6:{
+      fontSize: 19,
+      fontWeight: 1000
+      },
     body1:{
         fontSize: 19,
-        fontWeight: 1000
+        fontWeight: 700
     },
   },
 

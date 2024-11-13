@@ -21,6 +21,12 @@ const Header: React.FC = () => {
   const handleHomeClick = () => {
     navigator("/vraj"); // Navigate to the Projects page
   };
+  const handleSkillClick = () => {
+    navigator("/vraj/skills"); // Navigate to the Projects page
+  }
+  const handleLiveClick = () => {
+    navigator("/vraj/live_projects"); // Navigate to the Projects page
+  }
   return (
     <AppBar
       position="absolute"
@@ -35,10 +41,35 @@ const Header: React.FC = () => {
         <Button onClick={handleHomeClick} color="inherit">
           Home
         </Button>
-        <Button color="inherit">Skills</Button>
+        <Button onClick={handleSkillClick} color="inherit">Skills</Button>
         <Button onClick={handleProjectsClick} color="inherit">
           Projects
         </Button>
+        <Button onClick={handleLiveClick} color="inherit" sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Box
+        sx={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '8px', // Space between text and dot
+        }}
+      >
+        Live Projects
+        <Box
+          sx={{
+            width: 8,
+            height: 8,
+            backgroundColor: 'red',
+            borderRadius: '50%',
+            animation: 'blinker 1.5s cubic-bezier(0.66, 0, 0.13, 1) infinite',
+            '@keyframes blinker': {
+              '0%': { opacity: 1 },
+              '50%': { opacity: 0 },
+              '100%': { opacity: 1 },
+            },
+          }}
+        />
+      </Box>
+    </Button>
         <Box sx={{ ml: 2 }}>
           <IconButton color="inherit" href="https://linkedin.com/in/vrajpithwa">
             <LinkedInIcon />

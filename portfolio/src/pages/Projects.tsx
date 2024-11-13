@@ -1,6 +1,8 @@
 import React from 'react';
 import { Container, Grid, Card, CardContent, CardActions, Typography, Button } from '@mui/material';
 import { styled } from '@mui/system';
+import { useNavigate } from "react-router-dom";
+
 
 interface Project {
   title: string;
@@ -33,12 +35,21 @@ const projects: Project[] = [
 const ProjectCard = styled(Card)(({ theme }) => ({
   backgroundColor: theme.palette.background.default,
   color: theme.palette.text.primary,
+  transition: 'transform 0.3s ease, box-shadow 0.3s ease',
+  '&:hover': {
+    transform: 'scale(1.05)',
+
+  }
 }));
 
 const Projects: React.FC = () => {
+  const navigator = useNavigate();
+  const handleGameClick = () => {
+    navigator("/vraj/game"); // Navigate to the Projects page
+  };
   return (
     
-    <Container maxWidth="lg" sx={{ paddingTop: "80px" }}>
+    <Container maxWidth="lg" sx={{ paddingTop: "80px"}}>
       <Typography variant="h2" align="center" gutterBottom>
         My Projects
       </Typography>
@@ -66,6 +77,11 @@ const Projects: React.FC = () => {
           </Grid>
         ))}
       </Grid>
+      <Container sx={{justifyContent:'center', width:'100%', display: 'flex', marginTop: '10%'}}>
+      <Button onClick={handleGameClick}  style={{marginTop:70}}>
+        Play Game!
+      </Button >
+      </Container>
     </Container>
   );
 };

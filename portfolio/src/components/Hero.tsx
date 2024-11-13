@@ -45,6 +45,7 @@ const CornerImage = styled("img")({
 const Content = styled(Box)({
   position: "absolute",
   zIndex: 3, // Increased z-index to be above both blur and corner image
+  alignItems: 'center'
 });
 
 const Hero: React.FC = () => {
@@ -56,7 +57,7 @@ const Hero: React.FC = () => {
         <Typography variant="h5" color="secondary" sx={{ marginRight: 2 }}>
           Welcome to my Portfolio
         </Typography>
-        <Box display="flex" alignItems="center">
+        <div style={{display: "flex", justifyContent: "center"}}>
           <Typography variant="h1">
             Hi! I'm 
           </Typography>
@@ -71,18 +72,29 @@ const Hero: React.FC = () => {
           >
             Vraj Pithwa
           </Typography>
-        </Box>
-        <Typography variant="body1" sx={{ maxWidth: 600, mx: "auto", mb: 4 }}>
-          Software,
-          <Typewriter
-            options={{
-              strings: ['Software Developer', 'gain hands-on experience with modern tech.'],
-              autoStart: true,
-              loop: true,
-            }}
-          />
-        </Typography>
-        <Button variant="contained" color="secondary">
+          </div>
+        <Typography variant="h6" sx={{ mx: "auto", marginRight:1}}>
+  Aspiring software developer with hands-on experience in developing, testing, and maintaining projects using modern technologies.
+    </Typography>
+
+  <Typewriter
+    options={{
+      strings: [ "Passionate Web Developer",
+        "Frontend Engineer",
+        "Full Stack Developer",
+        "UI/UX Enthusiast",
+        "Mobile App Developer",
+        "Tech Innovation Explorer",
+        "AI & ML Enthusiast"],
+      autoStart: true,
+      loop: true,
+    }}
+  />
+
+  
+<br></br>
+
+        <Button variant="contained" color="secondary" style={{marginTop:70}}>
           <a
             href="https://www.linkedin.com/in/vrajpithwa"
             target="_blank"
@@ -97,6 +109,7 @@ const Hero: React.FC = () => {
         </Button>
       </Content>
 
+            
     </HeroContainer>
   );
 };
