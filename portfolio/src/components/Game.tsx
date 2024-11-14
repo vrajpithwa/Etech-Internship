@@ -200,7 +200,7 @@ const Game: React.FC = () => {
           </Button>
         </div>
       </div>
-      <DataTable refreshData={refreshData} />
+      {/* <DataTable refreshData={refreshData} /> */}
     </Container>
   );
 };
