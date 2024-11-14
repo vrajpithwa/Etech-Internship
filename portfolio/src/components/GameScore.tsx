@@ -54,13 +54,12 @@ const DataTable: React.FC<DataTableProps> = ({ refreshData }) => {
   const handleEdit = (row: ScoreData) => {
     setEditRow(row);
     setOpenEditModal(true);
-    setError(''); // Clear any previous errors
+    setError('');
   };
 
   const handleSaveEdit = async () => {
     if (!editRow) return;
 
-    // Validate data
     const validationError = validateEditData(editRow);
     if (validationError) {
       setError(validationError);
@@ -76,7 +75,6 @@ const DataTable: React.FC<DataTableProps> = ({ refreshData }) => {
         editRow
       );
       
-      // Update state with the response data to ensure we have the latest server state
       setRows(rows.map((row) => (row.id === editRow.id ? response.data : row)));
       setOpenEditModal(false);
     } catch (error: any) {
@@ -88,7 +86,6 @@ const DataTable: React.FC<DataTableProps> = ({ refreshData }) => {
   };
 
   const handleDelete = async (id: number) => {
-    // Show confirmation dialog
     if (!window.confirm('Are you sure you want to delete this score?')) {
       return;
     }
@@ -115,7 +112,7 @@ const DataTable: React.FC<DataTableProps> = ({ refreshData }) => {
   };
 
   const columns: GridColDef[] = [
-    { field: 'id', headerName: 'ID', width: 90 },
+
     { field: 'player_name', headerName: 'Player Name', width: 150 },
     { field: 'score', headerName: 'Score', width: 100 },
     { field: 'created_at', headerName: 'Time', width: 200 },
@@ -154,7 +151,7 @@ const DataTable: React.FC<DataTableProps> = ({ refreshData }) => {
   ];
 
   return (
-    <Container>
+ <>
       <h1>Score Board</h1>
       {error && (
         <div style={{ color: 'red', marginBottom: '1rem', padding: '0.5rem', backgroundColor: '#ffebee' }}>
@@ -180,7 +177,7 @@ const DataTable: React.FC<DataTableProps> = ({ refreshData }) => {
             top: '50%',
             left: '50%',
             transform: 'translate(-50%, -50%)',
-            width: 400,
+            width: { xs: '80vw', sm: '60vw', md: '40vw' },
             bgcolor: 'background.paper',
             border: '2px solid #000',
             boxShadow: 24,
@@ -218,14 +215,14 @@ const DataTable: React.FC<DataTableProps> = ({ refreshData }) => {
             variant="contained"
             color="primary"
             onClick={handleSaveEdit}
-            style={{ marginTop: 16 }}
+            sx={{ mt: 2 }}
             disabled={saveLoading}
           >
             {saveLoading ? <CircularProgress size={24} color="inherit" /> : 'Save'}
           </Button>
         </Box>
       </Modal>
-    </Container>
+      </>
   );
 };
 

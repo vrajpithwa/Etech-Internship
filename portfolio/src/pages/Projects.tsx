@@ -29,8 +29,20 @@ const projects: Project[] = [
   {
     title: "Segment Anything and Replace",
     description: "Leveraged advanced image processing techniques to accurately isolate individuals and seamlessly integrate new backgrounds. ",
-    technologies: ["Flutter", "firebase"],
+    technologies: ["Python", "Javascript"],
     link: "https://github.com/vrajpithwa/Segment_and_Replace_Backgroung",
+  }, 
+  {
+    title: "Smart Kisan Mitra",
+    description: "Enhancing farmers efficiency and productivity. Developing a user-friendly application and hardware to provide remote access to water pumps for farmers ",
+    technologies: ["Flutter", "firebase"],
+    link: "https://github.com/vrajpithwa/Smart-Kisan-Mitra",
+  },
+  {
+    title: "Youtube Transcript Summarizer ©",
+    description: " Revolutionizing Video Consumption with Intelligent Summarization Developed an innovative Project that transforms lengthy video content into concise, digestible text overviews.",
+    technologies: ["Python", "Javascript"],
+    link: "https://github.com/vrajpithwa/YouTube-Transcript-Summarizer-main",
   },
 ];
 

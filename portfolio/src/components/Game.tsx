@@ -127,7 +127,7 @@ const Game: React.FC = () => {
   };
 
   return (
-    <Container sx={{ margin: 10 }}>
+    <Container>
       <div style={{ marginTop: '100px' }}>
         <h1>Tic-Tac-Toe Game</h1>
         
