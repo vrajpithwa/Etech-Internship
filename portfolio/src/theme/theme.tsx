@@ -9,11 +9,12 @@ const darkTheme = createTheme({
       paper: "#1E1E1E",
     },
     primary: {
+      light: '#F0C1E1',
       main: "#90caf9",
     },
     secondary: {
       main: "#f48fb1",
-    // main: "#8f92f4"
+
     },
     text: {
       primary: "#ffffff",
@@ -24,35 +25,32 @@ const darkTheme = createTheme({
     fontFamily: "system-ui",
     fontSize: 14,
     fontWeightBold: 1000,
-    h1:{
-        fontFamily: 'system-ui',
-        fontSize: 88,
-        fontWeight: 900,
-        
+    h1: {
+      fontFamily: "system-ui",
+      fontSize: 88,
+      fontWeight: 900,
     },
-    h2:{
-        fontSize: 60,
-        fontWeight: 800,
-
+    h2: {
+      fontSize: 60,
+      fontWeight: 800,
     },
-    h4:{
+    h4: {
       fontSize: 21,
       fontWeight: 600,
     },
-    h5:{
-        fontSize: 18,
-        fontWeight: 1000
+    h5: {
+      fontSize: 18,
+      fontWeight: 1000,
     },
-    h6:{
+    h6: {
       fontSize: 19,
-      fontWeight: 1000
-      },
-    body1:{
-        fontSize: 19,
-        fontWeight: 700
+      fontWeight: 1000,
+    },
+    body1: {
+      fontSize: 19,
+      fontWeight: 700,
     },
   },
-
 });
 
 export default darkTheme;

@@ -1,5 +1,5 @@
 import React from 'react';
-import floatImg from '../assets/logo512.png';
+import floatImg from '../assets/favicon.png';
 
 const FloatingImage: React.FC = () => {
   return (
@@ -11,9 +11,9 @@ const FloatingImage: React.FC = () => {
           position: 'fixed',
           bottom: '20px',
           right: '20px',
-          width: '50px', // Adjust as needed
+          width: '100px', // Adjust as needed
           height: 'auto',
-          animation: 'float 2s ease-in-out infinite'
+          // animation: 'float 2s ease-in-out infinite'
         }}
       />
       <style>

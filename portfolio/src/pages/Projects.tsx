@@ -1,7 +1,9 @@
 import React from 'react';
-import { Container, Grid, Card, CardContent, CardActions, Typography, Button } from '@mui/material';
+import { Container, Grid, Card, CardContent, CardActions, Typography, Button, IconButton } from '@mui/material';
 import { styled } from '@mui/system';
+import SportsEsportsIcon from '@mui/icons-material/SportsEsports';
 import { useNavigate } from "react-router-dom";
+import theme from '../theme/theme';
 
 
 interface Project {
@@ -77,11 +79,32 @@ const Projects: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-      <Container sx={{justifyContent:'center', width:'100%', display: 'flex', marginTop: '10%'}}>
-      <Button onClick={handleGameClick}  style={{marginTop:70}}>
-        Play Game!
+      {/* <Container sx={{justifyContent:'center', width:'100%', display: 'flex', marginTop: '10%'}}>
+      <Button  variant='contained' onClick={handleGameClick}  style={{marginTop:70, borderRadius: '50px',  backgroundColor: theme.palette.primary.light,}}>
+      Play Game!
+      <IconButton color="inherit" onClick={handleGameClick}>
+      <SportsEsportsIcon></SportsEsportsIcon>
+      </IconButton>
       </Button >
-      </Container>
+      </Container> */}
+      <IconButton
+          
+        onClick={handleGameClick}
+         sx={{
+          position: 'fixed',
+          bottom: 16,
+          right: 16,
+          borderRadius: '50%',
+          padding: 1,
+          backgroundColor: 'primary.light',
+          color: "black",
+          boxShadow: 3,
+          '&:hover': {
+            backgroundColor: 'primary.dark',
+          },
+        }}>
+        <SportsEsportsIcon />
+        </IconButton>
     </Container>
   );
 };

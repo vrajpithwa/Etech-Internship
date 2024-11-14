@@ -1,28 +1,28 @@
 // src/components/Hero.tsx
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, useTheme, useMediaQuery } from "@mui/material";
 import styled from "@emotion/styled";
 import cornerImg from '../assets/bg3.png';
-import cornerImg2 from '../assets/bg2.png';
 import Typewriter from 'typewriter-effect';
 
 // Create a separate container for the blur effect
+
 const BlurBackground = styled(Box)({
-  position: 'unset',
-  top: 0,
-  left: 0,
-  width: "500px",
-  height: "30%",
+  position: 'absolute',
+  // top: 0,
+  // left: 0,
+  width: "40%",
+  height: "13%",
+  // backgroundColor: 'rgb(255, 255, 255)',
   backgroundColor: 'rgb(138, 43, 226)',
   filter: 'blur(100px)',
-  opacity: '0.3',
+  opacity: '0.7',
   zIndex: 2,
 });
 
-
 const HeroContainer = styled(Box)({
   position: "relative",
-  height: "100vh",
+  minHeight: "100vh", // Changed from fixed height to minHeight
   color: "#ffffff",
   display: "flex",
   alignItems: "center",
@@ -30,6 +30,7 @@ const HeroContainer = styled(Box)({
   textAlign: "center",
   overflow: "hidden",
   zIndex: 1,
+  padding: "20px", // Added padding for mobile
 });
 
 const CornerImage = styled("img")({
@@ -42,29 +43,66 @@ const CornerImage = styled("img")({
   zIndex: 2,
 });
 
-const Content = styled(Box)({
+const Content = styled(Box)(({ theme }) => ({
   position: "absolute",
-  zIndex: 3, // Increased z-index to be above both blur and corner image
-  alignItems: 'center'
-});
+  zIndex: 3,
+  width: "100%",
+  maxWidth: "1200px", // Added max-width for large screens
+  padding: "0 20px", // Added horizontal padding
+}));
 
 const Hero: React.FC = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isTablet = useMediaQuery(theme.breakpoints.between('sm', 'md'));
+
   return (
     <HeroContainer>
-      <BlurBackground /> 
-      {/* <CornerImage src={cornerImg} alt="background" /> */}
+      <BlurBackground />
       <Content>
-        <Typography variant="h5" color="secondary" sx={{ marginRight: 2 }}>
+        <Typography 
+          variant={isMobile ? "h6" : "h5"} 
+          color="secondary" 
+          sx={{ 
+            marginBottom: { xs: 2, sm: 3 },
+            fontSize: {
+              xs: '1rem',     // Mobile
+              sm: '1.25rem',  // Tablet
+              md: '1.5rem'    // Desktop
+            }
+          }}
+        >
           Welcome to my Portfolio
         </Typography>
-        <div style={{display: "flex", justifyContent: "center"}}>
-          <Typography variant="h1">
-            Hi! I'm 
+
+        <Box sx={{ 
+          display: "flex", 
+          flexDirection: { xs: 'column', sm: 'row' }, // Stack on mobile, row on tablet+
+          justifyContent: "center",
+          alignItems: { xs: 'center', sm: 'baseline' },
+          gap: { xs: 1, sm: 2 }
+        }}>
+          <Typography 
+            variant="h1"
+            sx={{
+              fontSize: {
+                xs: '2.5rem',  // Mobile
+                sm: '3.5rem',  // Tablet
+                md: '5.5rem'   // Desktop
+              }
+            }}
+          >
+            Hi! I'm
           </Typography>
           <Typography
             variant="h1"
-            style={{
-              marginLeft: 20,
+            sx={{
+              fontSize: {
+                xs: '2.5rem',  // Mobile
+                sm: '3.5rem',  // Tablet
+                md: '5.5rem'   // Desktop
+              },
+              marginLeft: { xs: 0, sm: 2 },
               background: 'linear-gradient(45deg,#ff69b4,#da70d6,#9370db,#87cefa)',
               WebkitBackgroundClip: 'text',
               color: 'transparent'
@@ -72,30 +110,51 @@ const Hero: React.FC = () => {
           >
             Vraj Pithwa
           </Typography>
-          </div>
-        <Typography variant="h6" sx={{ mx: "auto", marginRight:1}}>
-  Aspiring software developer with hands-on experience in developing, testing, and maintaining projects using modern technologies.
-    </Typography>
+        </Box>
 
-  <Typewriter
-    options={{
-      strings: [ "Passionate Web Developer",
-        "Frontend Engineer",
-        "Full Stack Developer",
-        "UI/UX Enthusiast",
-        "Mobile App Developer",
-        "Tech Innovation Explorer",
-        "AI & ML Enthusiast"],
-      autoStart: true,
-      loop: true,
-    }}
-  />
-  
-<br></br>
+        <Typography 
+          variant="h6" 
+          sx={{ 
+            mx: "auto",
+            marginTop: { xs: 2, sm: 3 },
+            marginBottom: { xs: 2, sm: 3 },
+            maxWidth: { xs: '100%', sm: '80%', md: '70%' },
+            fontSize: {
+              xs: '0.875rem',  // Mobile
+              sm: '1rem',      // Tablet
+              md: '1.25rem'    // Desktop
+            }
+          }}
+        >
+          Aspiring software developer with hands-on experience in developing, testing, and maintaining projects using modern technologies.
+        </Typography>
 
+        <Box sx={{ 
+          '& .Typewriter': { 
+            fontSize: {
+              xs: '1rem',      // Mobile
+              sm: '1.25rem',   // Tablet
+              md: '1.5rem'     // Desktop
+            }
+          }
+        }}>
+          <Typewriter
+            options={{
+              strings: [
+                "Passionate Web Developer",
+                "Frontend Engineer",
+                "Full Stack Developer",
+                "UI/UX Enthusiast",
+                "Mobile App Developer",
+                "Tech Innovation Explorer",
+                "AI & ML Enthusiast"
+              ],
+              autoStart: true,
+              loop: true,
+            }}
+          />
+        </Box>
       </Content>
-
-            
     </HeroContainer>
   );
 };
