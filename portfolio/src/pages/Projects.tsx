@@ -47,7 +47,7 @@ const projects: Project[] = [
 ];
 
 const ProjectCard = styled(Card)(({ theme }) => ({
-  backgroundColor: theme.palette.background.default,
+  backgroundColor: theme.palette.background.paper,
   color: theme.palette.text.primary,
   transition: 'transform 0.3s ease, box-shadow 0.3s ease',
   '&:hover': {
@@ -75,10 +75,10 @@ const Projects: React.FC = () => {
                 <Typography variant="h5" component="div">
                   {project.title}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" sx={{ margin: "1rem 0" }}>
+                <Typography variant="body2" color="text.primary" sx={{ margin: "1rem 0" }}>
                   {project.description}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
+                <Typography variant="body2" color="text.primary">
                   <strong>Technologies:</strong> {project.technologies.join(", ")}
                 </Typography>
               </CardContent>

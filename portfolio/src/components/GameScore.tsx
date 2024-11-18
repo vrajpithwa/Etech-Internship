@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Button, Modal, TextField, Box, CircularProgress } from '@mui/material';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import axios from 'axios';
+import { errorHandler } from './ErrorHandler';
 
 interface ScoreData {
   id: number;
@@ -27,9 +28,10 @@ const DataTable: React.FC<DataTableProps> = ({ refreshData }) => {
     setLoading(true);
     setError('');
     try {
-      const response = await axios.get<ScoreData[]>('http://localhost:3000/api/score');
+      const response = await axios.get<ScoreData[]>('http://localhost:3000/api/scor');
       setRows(response.data);
     } catch (error) {
+      errorHandler.handleError(error as Error);
       setError('Error fetching data. Please try again later.');
       console.error('Error fetching data:', error);
     } finally {
@@ -153,11 +155,7 @@ const DataTable: React.FC<DataTableProps> = ({ refreshData }) => {
   return (
  <>
       <h1>Score Board</h1>
-      {error && (
-        <div style={{ color: 'red', marginBottom: '1rem', padding: '0.5rem', backgroundColor: '#ffebee' }}>
-          {error}
-        </div>
-      )}
+      
       <div style={{ height: 400, width: '100%' }}>
         <DataGrid
           rows={rows}

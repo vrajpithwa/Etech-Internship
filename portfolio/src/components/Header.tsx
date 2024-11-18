@@ -31,7 +31,7 @@ import {
 } from "@mui/icons-material";
 import { YouTube } from "@mui/icons-material";
 import { MailOutlineOutlined } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header: React.FC = () => {
   const theme = useTheme();
@@ -160,7 +160,10 @@ const Header: React.FC = () => {
             fontWeight: 500
           }}
         >
-          Vraj's Portfolio
+         <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+  Vraj's Portfolio
+</Link>
+
         </Typography>
 
         {/* Desktop Navigation */}
