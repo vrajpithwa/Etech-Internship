@@ -1,28 +1,55 @@
-// src/components/ErrorDialog.tsx
-import React from 'react';
+import React, { useState } from "react";
 import {
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
   Button,
+  IconButton,
   Typography,
+  Alert,
   Paper,
-} from '@mui/material';
+  Tooltip,
+  DialogProps
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+
 interface ErrorData {
-  id: number;
   message: string;
-  stack: string;
-  timestamp?: string;
+  stack?: string;
+  [key: string]: any;
 }
 
 interface ErrorDialogProps {
-  error: ErrorData | null;
   open: boolean;
   onClose: () => void;
+  error: ErrorData | null;
+  title?: string;
 }
 
-const ErrorDialog: React.FC<ErrorDialogProps> = ({ error, open, onClose }) => {
+const ErrorDialog: React.FC<ErrorDialogProps> = ({ 
+  open, 
+  onClose, 
+  error,
+  title = "Error Details"
+}: ErrorDialogProps) => {
+  const [copied, setCopied] = useState<boolean>(false);
+
+  const copyToClipboard = async (): Promise<void> => {
+    if (!error) return;
+    
+    try {
+      const errorText = `Error: ${error.message}\n\nStack Trace:\n${error.stack}`;
+      await navigator.clipboard.writeText(errorText);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy error details:", err);
+    }
+  };
+
   if (!error) return null;
 
   return (
@@ -32,58 +59,75 @@ const ErrorDialog: React.FC<ErrorDialogProps> = ({ error, open, onClose }) => {
       maxWidth="md"
       fullWidth
       PaperProps={{
-        style: { 
-          backgroundColor: '#1e1e1e', 
-          color: 'white' 
+        sx: {
+          minHeight: '300px'
         }
       }}
     >
-      <DialogTitle>Error Details</DialogTitle>
-      <DialogContent>
-        <div className="space-y-4">
+      <DialogTitle sx={{ 
+        display: 'flex', 
+        justifyContent: 'space-between', 
+        alignItems: 'center',
+        mb: 1
+      }}>
+        <Typography variant="h6">{title}</Typography>
+        {/* <IconButton 
+          onClick={onClose}
+          size="small"
+          aria-label="close"
+        >
+          <CloseIcon />
+        </IconButton> */}
+      </DialogTitle>
+
+      <DialogContent sx={{ pt: 1 }}>
+        <Alert 
+          severity="error" 
+          sx={{ mb: 3 }}
+        >
+          {error.message}
+        </Alert>
+
+        {error.stack && (
           <div>
-            <Typography variant="subtitle2" color="textSecondary">
-              Error Message
-            </Typography>
-            <Typography color="textPrimary">{error.message}</Typography>
-          </div>
-          
-          <div>
-            <Typography variant="subtitle2" color="textSecondary">
-              Timestamp
-            </Typography>
-            <Typography color="textPrimary">
-              {new Date(error.timestamp || '').toLocaleString()}
-            </Typography>
-          </div>
-          
-          <div>
-            <Typography variant="subtitle2" color="textSecondary">
-              Stack Trace
-            </Typography>
+            <div style={{ 
+              display: 'flex', 
+              justifyContent: 'space-between',
+              alignItems: 'center',
+              marginBottom: '8px'
+            }}>
+              <Typography variant="subtitle2">Stack Trace</Typography>
+              <Tooltip title={copied ? "Copied!" : "Copy to clipboard"}>
+                <Button
+                  size="small"
+                  variant="outlined"
+                  startIcon={copied ? <CheckCircleIcon /> : <ContentCopyIcon />}
+                  onClick={copyToClipboard}
+                >
+                  {copied ? 'Copied!' : 'Copy'}
+                </Button>
+              </Tooltip>
+            </div>
+            
             <Paper 
-              variant="outlined"
-              style={{ 
-                backgroundColor: '#2c2c2c', 
-                padding: '16px', 
-                maxHeight: '300px', 
-                overflowY: 'auto' 
+              variant="outlined" 
+              sx={{ 
+            
+                p: 2,
+                maxHeight: '300px',
+                overflow: 'auto'
               }}
             >
-              <pre style={{ 
-                whiteSpace: 'pre-wrap', 
-                wordBreak: 'break-word',
-                margin: 0,
-                color: '#e0e0e0'
-              }}>
-                {error.stack}
+              <pre style={{ margin: 0, fontSize: '0.875rem' }}>
+                <code>{error.stack}</code>
               </pre>
             </Paper>
           </div>
-        </div>
+        )}
       </DialogContent>
-      <DialogActions>
-        <Button onClick={onClose} color="primary" variant="contained">
+
+      <DialogActions sx={{ p: 2 }}>
+        <Button onClick={onClose} variant="contained">
           Close
         </Button>
       </DialogActions>

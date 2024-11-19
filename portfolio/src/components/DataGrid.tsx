@@ -79,14 +79,14 @@ const Datagrid: React.FC = () => {
   const fetchData = async (): Promise<void> => {
     setLoading(true);
     try {
-      const response = await fetch('http://localhost:3000/api/sogs');
+      const response = await fetch('http://localhost:3000/api/songs');
       const data: SpotifySong[] = await response.json();
       const dataWithIds = data.map(row => ({ ...row, id: uuidv4() }));
       setRows(dataWithIds);
       setFilteredRows(dataWithIds);
       setTimeout(() => setLoading(false), 1000);
     } catch (error) {
-      errorHandler.handleError(error as Error, 'Failed to fetch Data');
+      errorHandler.handleError(error as Error,'Error occured');
       setLoading(false);
     }
   };
@@ -114,19 +114,11 @@ const Datagrid: React.FC = () => {
     { field: 'artist', headerName: 'Artist', width: 150 },
     { field: 'genre', headerName: 'Genre', width: 100 },
     { field: 'release_date', headerName: 'Release Date', width: 200 },
-  ];
+  ];  
 
   return (
-    <div className="p-8" style={{margin: 100}}>
-      {/* <div className="mb-4">
-        <input
-          type="text"
-          placeholder="Search by title, artist, or genre"
-          value={searchQuery}
-          onChange={handleSearch}
-          className="p-2 w-72 border border-gray-300 rounded"
-        />
-      </div> */}
+    <div className="p-5" style={{margin: 100}}>
+     
       <div style={{ marginBottom: 20 }}>
         <input
           type="text"

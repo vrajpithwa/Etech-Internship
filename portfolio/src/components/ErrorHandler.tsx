@@ -4,7 +4,7 @@ interface ErrorData {
     stack: string;
     timestamp?: string;
   }
-  export interface ErrorHandlerOptions {
+interface ErrorHandlerOptions {
     showNotification?: (message: string, errorData: ErrorData) => void;
   }
 class ErrorHandler {
@@ -42,28 +42,26 @@ class ErrorHandler {
       stack: typeof error === 'string' 
         ? 'No stack trace available' 
         : error.stack || 'No stack trace available',
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
-
-    // Save to localStorage
-    const storedErrors = localStorage.getItem('errors');
-    const errors = storedErrors ? JSON.parse(storedErrors) : [];
-    errors.push(errorData);
-    localStorage.setItem('errors', JSON.stringify(errors.slice(-50))); // Keep last 50 errors
-
+  
+    // Check if this error has already been handled recently
+    const lastError = localStorage.getItem('lastError');
+    if (lastError && JSON.stringify(errorData) === lastError) {
+      console.warn('Duplicate error suppressed:', errorData);
+      return;
+    }
+    localStorage.setItem('lastError', JSON.stringify(errorData));
+  
     // Notify all listeners
     this.listeners.forEach(listener => listener(errorData));
-
-    // Show notification with complete error data
+  
+    // Show notification
     if (this.showNotification) {
       this.showNotification(errorData.message, errorData);
     }
-
-    // Optional: console log in development
-    if (process.env.NODE_ENV === 'development') {
-      console.error('Handled Error:', errorData);
-    }
   };
+  
 }
 
 export const errorHandler = ErrorHandler.getInstance();

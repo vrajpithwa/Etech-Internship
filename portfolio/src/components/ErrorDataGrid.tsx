@@ -56,6 +56,7 @@ const ErrorDataGrid: React.FC = () => {
   return (
     <div className="space-y-4">
       <div className="flex justify-between items-center">
+        <button>Open dailog</button>
         <h2 className="text-xl font-semibold">Error Log</h2>
         <button
           onClick={handleClearErrors}
@@ -76,6 +77,7 @@ const ErrorDataGrid: React.FC = () => {
           checkboxSelection
         />
       </div>
+
     </div>
   );
 };
