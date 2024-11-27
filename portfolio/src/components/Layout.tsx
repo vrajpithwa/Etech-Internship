@@ -8,6 +8,7 @@ import TechStack from "./TechStack";
 import HostedWebsitesPage from "./HostedWeb";
 import Datagrid from "./DataGrid";
 import ErrorDataGrid from "./ErrorDataGrid";
+// import UserDetails from "./User";
 
 
 
@@ -24,6 +25,8 @@ const Layout = () => {
         <Route path="/vraj/live_projects" element={<HostedWebsitesPage />} />
         <Route path="/vraj/datagrid" element={<Datagrid />} />
         <Route path="/vraj/error" element={<ErrorDataGrid/>} />
+        {/* <Route path="/vraj/users" element={<UserDetails/>} /> */}
+
       </Routes>
     </Router>
   );
